@@ -6,15 +6,14 @@
 
 int main() {
 
-    Die test(20);
+    Die d20(20), d10(10), d6(6), d4(4), dArbitrary{};
+
+    DiceSet test(d20, 3, -4);
 
     
-    std::cout << "\n\nTest default sides: " << test.getSides() << '\n';
+    std::cout << "\n\nTest set: \n" << test.toString() << "\nSum: " << test.getSum() << '\n';
 
-    for (int i =0; i <6; i++) {
-        test.roll();
-        std::cout<< "Test roll #" << i << ": " << test.getRoll() << '\n';
-    }
+
     
     return 0;
 }

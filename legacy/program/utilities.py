@@ -43,3 +43,7 @@ def goose_boast():# another easter egg, with a random chance to be called on pla
 def show_instructions():
     with open("instructions.txt") as file:
         print("\n" + file.read())
+
+
+#deprecated due to removal of save system; kept for possible eventual update
+# def show_high_score():
