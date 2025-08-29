@@ -1,0 +1,8 @@
+=================================
+        EXITING APP
+=================================
+
+Thanks for using the Dice Rolling App!
+Good luck on your next adventure 🎲
+
+=================================

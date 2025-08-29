@@ -1,19 +1,33 @@
 #include <iostream>
 #include <string>
+
+
 #include "dice.h"
+#include "rollset.h"
 
-
+#include "menu.h"
 
 int main() {
 
-    Die d20(20), d10(10), d6(6), d4(4), dArbitrary{};
+    gameContext ctx(4);
 
-    DiceSet test(d20, 3, -4);
+    //bool running = true;
 
+    int userSide = 2;
+
+
+
+    while (isRunning()) {
+        showMenu("data/main-menu.txt");
+        menuSelect(ctx);
     
-    std::cout << "\n\nTest set: \n" << test.toString() << "\nSum: " << test.getSum() << '\n';
+    }
+
+
+    showMenu("data/exit.txt");
 
 
     
     return 0;
 }
+

@@ -1,0 +1,12 @@
+=================================
+        DICE ROLLING APP
+=================================
+
+[1] Roll dice
+[2] Create a custom dice set
+[3] View saved dice sets
+[4] Exit
+
+=================================
+     Select an option to begin
+=================================

@@ -1,0 +1,12 @@
+=================================
+        CREATE CUSTOM SET
+=================================
+
+Define your custom dice set:
+ - Choose die type
+ - Enter number of dice
+ - (Optional) Add modifier (+/-)
+
+ [0] Back to main menu
+
+=================================
