@@ -2,10 +2,10 @@
 #include <string>
 
 
-#include "dice.h"
-#include "rollset.h"
-
-#include "menu.h"
+#include "headers/dice.h"
+#include "headers/rollset.h"
+#include "headers/favorite.h"
+#include "headers/menu.h"
 
 int main() {
 
@@ -14,6 +14,7 @@ int main() {
     //bool running = true;
 
     int userSide = 2;
+
 
 
 

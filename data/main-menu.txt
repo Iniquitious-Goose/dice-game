@@ -3,7 +3,7 @@
 =================================
 
 [1] Roll dice
-[2] Create a custom dice set
+[2] Roll a saved dice set
 [3] View saved dice sets
 [4] Exit
 

@@ -3,7 +3,8 @@
 #include <fstream>
 #include <string>
 
-#include "menu.h"
+#include "headers/menu.h"
+#include "headers/favorite.h"
 
 bool running = true;
 
@@ -26,9 +27,17 @@ void showMenu(const std::string& fileName) {
 void menuSelect(gameContext& ctx) {
     int userChoice;
     std::string input;
+    std::string id = "default";
+
+
+    FavoriteList favList;
+
 
     std::cout << "\n> ";
     std::getline(std::cin, input);
+
+    favList.openFile();
+    favList.loadFromFile();
 
     try {
 
@@ -44,7 +53,25 @@ void menuSelect(gameContext& ctx) {
                 rollSet(ctx);
                 break;
 
-                        
+            case menuOption::rollFav:
+                favList.showFavorites();
+                std::cout<< "\n\nEnter favorite ID: ";
+                std::getline(std::cin, id);
+                favList.rollFavorite(id);
+                
+
+
+                //favorite.loadFromFile(id);
+                //std::cout<<favorite.toString();
+
+                break;
+                
+            
+            //case menuOption::viewFavorites:
+              //  favList.openFile();
+                //favList.showFavorites();
+
+
          case::menuOption::exit:
             setRunning(false);
         

@@ -1,5 +1,5 @@
-#include "dice.h"
-#include "menu.h"
+#include "headers/dice.h"
+#include "headers/menu.h"
 
 void setCustomSides(gameContext& cfx, int sides) {
     if (sides < 1 ) {

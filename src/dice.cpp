@@ -1,4 +1,4 @@
-#include "dice.h"
+#include "headers/dice.h"
 #include <iomanip>
 #include <stdexcept>
 #include <sstream>
@@ -30,7 +30,7 @@ void Die::setSides(const int x) {
     sides = x;
 }
 
-int Die::getSides(){
+int Die::getSides() const{
     return sides;
 }
 
@@ -52,7 +52,6 @@ std::string Die::toString() {
 DiceSet::DiceSet(Die dice, int count, int modifier) : count(count), modifier(modifier), sum(0), dice(dice){
 
     rollAll();
-    sum += modifier;
 }
 
 DiceSet::DiceSet() {}
@@ -60,15 +59,17 @@ DiceSet::DiceSet() {}
 void DiceSet::setModifier(const int x) {modifier = x;}
 void DiceSet::setSum(const int x) {sum = x;}
 
-int DiceSet::getSum() {
+int DiceSet::getSum() const{
     return sum;
 }
 
 void DiceSet::setCount(const int x) {count =x;}
+int DiceSet::getModifier()const {return modifier;}
 
+int DiceSet::getCount() const{return count;}
+int DiceSet::getRoll() const{return lastRoll;}
 
-int DiceSet::getCount() {return count;}
-int DiceSet::getRoll() {return lastRoll;}
+int DiceSet::getSides() const {return dice.getSides();}
 
 void DiceSet::rollAll() {
     
@@ -87,7 +88,7 @@ void DiceSet::rollAll() {
 void DiceSet::setDie(Die die) {
     dice = die;
 }
-std::string DiceSet::toString() {
+std::string DiceSet::toString() const{
     std::ostringstream output;
     
     for(size_t i =0; i < diceSet.size(); i++) {

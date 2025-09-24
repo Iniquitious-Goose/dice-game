@@ -11,7 +11,7 @@ class Die {
     int getRoll();
     
     void setSides(int);
-    int getSides();
+    int getSides() const;
     std::string toString();
     
     
@@ -31,12 +31,15 @@ class DiceSet {
     DiceSet(Die dice, int count = 1, int modifier = 0);
     DiceSet();
 
-    void rollAll();
+    int getSides() const;
 
-    int getSum();
+    void rollAll();
+    int getModifier() const;
+
+    int getSum()const;
 
     void setCount(const int);
-    int getCount();
+    int getCount()const;
 
     void setDie(Die);
 
@@ -44,9 +47,9 @@ class DiceSet {
     
     void setModifier(const int);
 
-    int getRoll();
+    int getRoll () const;
 
-    std::string toString();
+    std::string toString() const;
 
 
     private:

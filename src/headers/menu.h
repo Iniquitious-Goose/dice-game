@@ -8,7 +8,9 @@
 enum class menuOption {
     rollSet =1,
     createSet,
-    viewSet,
+    rollFav,
+   // viewSet,
+   // viewFavorites,
     exit
 };
 
