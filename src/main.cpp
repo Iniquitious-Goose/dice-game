@@ -13,14 +13,14 @@ int main() {
 
     //bool running = true;
 
-    int userSide = 2;
+    //int userSide = 2;
 
 
 
 
     while (isRunning()) {
         showMenu("data/main-menu.txt");
-        menuSelect(ctx);
+        handleMainMenu(ctx);
     
     }
 

@@ -5,15 +5,11 @@
 Enter how many dice you want to roll
 and select the die type.
 
- [1] D4
- [2] D6
- [3] D8
- [4] D10
- [5] D12
- [6] D20
- [7] Custom number of sides
- [8] Set number of dice
- [9] Set modifier
- [0] Back to main menu
+ [1] Roll
+ [2] Set number of sides
+ [3] Set number of dice
+ [4] Set modifier
+ [5] Save current set as favorite
+ [6] Back to main menu
  
  =================================

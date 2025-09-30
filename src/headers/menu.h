@@ -7,25 +7,27 @@
 
 enum class menuOption {
     rollSet =1,
-    createSet,
     rollFav,
    // viewSet,
    // viewFavorites,
     exit
 };
 
+enum class rollOption {
+   roll = 1,
+ setSide,
+ setCount,
+ setMod,
+ saveSet,
+    exit
+};
+
+
 
 struct gameContext {
-    Die d20;
-    Die d12;
-    Die d10;
-    Die d8;
-    Die d6;
-    Die d4;
-    Die dArbitrary;
     DiceSet set;
 
-    gameContext(int userSide) : d20(20), d12(12), d10(10), d8(8), d6(6), d4(4), dArbitrary(userSide), set() {}
+    gameContext(int userSide) : set() {}
 
 
 };
@@ -38,7 +40,9 @@ void waitForEnter();
 void setRunning(bool);
 bool isRunning();
 
-void menuSelect(gameContext& ctx);
+void handleMainMenu(gameContext& ctx);
+
+void handleRollMenu(gameContext& ctx);
 
 //void rollSingleDie(gameContext& ctx);
 void setCustomSides(gameContext& cfx, int sides);

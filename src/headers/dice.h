@@ -50,6 +50,8 @@ class DiceSet {
     int getRoll () const;
 
     std::string toString() const;
+    std::string toBaseString() const;
+
 
 
     private:

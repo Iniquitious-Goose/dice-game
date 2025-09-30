@@ -54,7 +54,7 @@ DiceSet::DiceSet(Die dice, int count, int modifier) : count(count), modifier(mod
     rollAll();
 }
 
-DiceSet::DiceSet() {}
+DiceSet::DiceSet() : count(1), modifier(0), sum(0), dice(Die(6)){}
 
 void DiceSet::setModifier(const int x) {modifier = x;}
 void DiceSet::setSum(const int x) {sum = x;}
@@ -96,5 +96,18 @@ std::string DiceSet::toString() const{
     }
 
     output << "Modifier: " << modifier << "\nSum: " << sum;
+    return output.str();
+}
+
+std::string DiceSet::toBaseString() const{
+    std::ostringstream output;
+    
+    output << count << "d" << dice.getSides() << " ";
+    if(modifier >= 0) {
+        output << "+ ";
+    }
+
+    output << modifier;
+
     return output.str();
 }
