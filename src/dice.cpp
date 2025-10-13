@@ -83,6 +83,21 @@ void DiceSet::rollAll() {
         sum +=dice.getRoll();
     }
 
+    setMean(sum/count);
+
+    min = diceSet[0]; max = diceSet[0];
+
+    for (int i =0; i < getCount(); i++) {
+        if (min > diceSet[i]) {
+        min = diceSet[i];
+        }
+        else if (max < diceSet[i]) {
+        max = diceSet[i];
+        }
+    }
+
+
+    
 }
 
 void DiceSet::setDie(Die die) {
@@ -95,7 +110,7 @@ std::string DiceSet::toString() const{
         output << "Roll #" << i+1 << ": " << diceSet[i] << "\n";
     }
 
-    output << "Modifier: " << modifier << "\nSum: " << sum;
+    output << "Modifier: " << modifier << "\nSum: " << sum << "\nHighest: " << max << "\nLowest: " << min << "\nMean: " << mean;
     return output.str();
 }
 
