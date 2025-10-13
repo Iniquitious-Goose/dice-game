@@ -49,6 +49,16 @@ class DiceSet {
 
     int getRoll () const;
 
+    int getMin() const {return min;}
+
+    int getMax() const {return max;}
+
+    int getMean() const {return mean;}
+
+    void setMin(const int x) {min = x;}
+    void setMax(const int x) {max = x;}
+    void setMean(const int x) {mean = x;}
+
     std::string toString() const;
     std::string toBaseString() const;
 
@@ -56,7 +66,7 @@ class DiceSet {
 
     private:
     std::vector<int> diceSet;
-    int count, modifier, sum, lastRoll;
+    int count, modifier, sum, lastRoll, min = 0, max = 0, mean =0;
     Die dice;
 
 };

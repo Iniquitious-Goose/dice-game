@@ -47,4 +47,6 @@ void handleRollMenu(gameContext& ctx);
 //void rollSingleDie(gameContext& ctx);
 void setCustomSides(gameContext& cfx, int sides);
 
-void rollSet(gameContext& ctx);
+//void rollSet(gameContext& ctx);
+
+std::string getInput();

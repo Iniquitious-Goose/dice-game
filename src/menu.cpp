@@ -26,22 +26,19 @@ void showMenu(const std::string& fileName) {
 
 void handleMainMenu(gameContext& ctx) {
     int userChoice;
-    std::string input;
     std::string id = "default";
 
 
     FavoriteList favList;
 
 
-    std::cout << "\n> ";
-    std::getline(std::cin, input);
 
     favList.openFile();
     favList.loadFromFile();
 
     try {
 
-        userChoice = std::stoi(input);
+        userChoice = std::stoi(getInput());
 
 
         menuOption option = static_cast<menuOption>(userChoice);
@@ -55,20 +52,12 @@ void handleMainMenu(gameContext& ctx) {
             case menuOption::rollFav:
                 favList.showFavorites();
                 std::cout<< "\n\nEnter favorite ID: ";
-                std::getline(std::cin, id);
+                id = getInput();
                 favList.rollFavorite(id);
                 
 
-
-                //favorite.loadFromFile(id);
-                //std::cout<<favorite.toString();
-
                 break;
                 
-            
-            //case menuOption::viewFavorites:
-              //  favList.openFile();
-                //favList.showFavorites();
 
 
          case menuOption::exit:
@@ -128,22 +117,18 @@ void handleRollMenu(gameContext& ctx) {
 
 
     int userChoice;
-    std::string input;
+
     std::string id = "default";
 
 
     FavoriteList favList;
     std::cout << "\nCurrent set: " << ctx.set.toBaseString();
 
-
-    std::cout << "\n> ";
-    std::getline(std::cin, input);
-
     
 
     try {
 
-        userChoice = std::stoi(input);
+        userChoice = std::stoi(getInput());
 
 
         rollOption option = static_cast<rollOption>(userChoice);
@@ -158,9 +143,8 @@ void handleRollMenu(gameContext& ctx) {
 
             case rollOption::setSide:
 
-                std::cout << "\n> ";
-                std::getline(std::cin, input);
-                userChoice = std::stoi(input);
+
+                userChoice = std::stoi(getInput());
 
                 ctx.set.setDie(Die(userChoice));
                 
@@ -168,9 +152,7 @@ void handleRollMenu(gameContext& ctx) {
                 break;
 
                 case rollOption::setCount:
-                std::cout << "\n> ";
-                std::getline(std::cin, input);
-                userChoice = std::stoi(input);
+                userChoice = std::stoi(getInput());
 
                 ctx.set.setCount(userChoice);
                 break;
@@ -178,9 +160,7 @@ void handleRollMenu(gameContext& ctx) {
                 
                 case rollOption::setMod:
                 
-                std::cout << "\n> ";
-                std::getline(std::cin, input);
-                userChoice = std::stoi(input);
+                userChoice = std::stoi(getInput());
                 ctx.set.setModifier(userChoice);
 
                 break;
@@ -220,5 +200,13 @@ void handleRollMenu(gameContext& ctx) {
 
 
 
+
+}
+
+std::string getInput() {
+    std::string input;
+    std::cout << "\n> ";
+    std::getline(std::cin, input);
+    return input;
 
 }
