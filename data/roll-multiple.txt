@@ -9,7 +9,7 @@ and select the die type.
  [2] Set number of sides
  [3] Set number of dice
  [4] Set modifier
- [5] Save current set as favorite
+ [5] Save current set as favorite (Coming soon!)
  [6] Back to main menu
  
  =================================
