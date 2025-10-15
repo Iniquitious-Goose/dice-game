@@ -1,8 +1,7 @@
-#include <iostream>
 #include <string>
-#include "dice.h"
+#include "dice.hpp"
 
-
+using namespace dice;
 
 
 enum class menuOption {

@@ -2,7 +2,7 @@
 #include <string>
 
 
-#include "headers/dice.h"
+#include "headers/dice.hpp"
 #include "headers/favorite.h"
 #include "headers/menu.h"
 

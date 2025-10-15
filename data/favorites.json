@@ -1,13 +1,11 @@
 {
     "default" : {
-        "name": "default",
         "sides": 6,
         "count": 1,
         "modifier": 0
     },
 
     "witch" : {
-        "name": "witch",
         "sides": 8,
         "count": 1,
         "modifier": 0 

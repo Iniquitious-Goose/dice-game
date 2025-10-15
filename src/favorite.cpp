@@ -3,6 +3,7 @@
 #include <iostream>
 #include <ostream>
 
+using namespace dice;
 
 
 void FavoriteList::openFile() {

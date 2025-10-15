@@ -3,11 +3,11 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include "dice.h"
+#include "dice.hpp"
 #include "json.hpp"
 
 using json = nlohmann::json;
-
+using namespace dice;
 
 class Favorite {
     public:
