@@ -5,12 +5,12 @@
 #include "headers/dice.hpp"
 #include "headers/favorite.h"
 #include "headers/menu.h"
+#include "headers/utilities.h"
 
 int main() {
-
     gameContext ctx(4);
 
-    while (isRunning()) {
+    while (ctx.program.isRunning()) {
         showMenu("data/main-menu.txt");
         handleMainMenu(ctx);
     

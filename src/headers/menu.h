@@ -1,19 +1,22 @@
+#pragma once
+
 #include <string>
 #include "dice.hpp"
-
-using namespace dice;
+#include "utilities.h"
+//using namespace dice;
 
 
 enum class menuOption {
     rollSet =1,
     rollFav,
+    games,
    // viewSet,
    // viewFavorites,
     exit
 };
 
 enum class rollOption {
-   roll = 1,
+ roll = 1,
  setSide,
  setCount,
  setMod,
@@ -23,29 +26,28 @@ enum class rollOption {
 
 
 
+enum class gameOption {
+    farkle =1,
+    knucklebones,
+    highLow,
+    cups,
+    exit
+};
+
+
+
+
 struct gameContext {
-    DiceSet set;
+    dice::DiceSet set;
+    Program program;
 
     gameContext(int userSide) : set() {}
-
-
 };
 
 
 void showMenu(const std::string& fileName);
 
-void waitForEnter();
-
-void setRunning(bool);
-bool isRunning();
-
 void handleMainMenu(gameContext& ctx);
 
 void handleRollMenu(gameContext& ctx);
-
-//void rollSingleDie(gameContext& ctx);
-void setCustomSides(gameContext& cfx, int sides);
-
-//void rollSet(gameContext& ctx);
-
-std::string getInput();
+void handleGameMenu(gameContext& ctx);

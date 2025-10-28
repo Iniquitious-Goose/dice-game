@@ -4,7 +4,8 @@
 
 [1] Roll dice
 [2] Roll a saved dice set
-[3] Exit
+[3] Minigames
+[4] Exit
 
 =================================
      Select an option to begin

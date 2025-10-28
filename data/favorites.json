@@ -15,5 +15,12 @@
         "sides": 54,
         "count": 13,
         "modifier": -1
+    },
+
+    "farkle" : {
+        "//": "do not change; needed for farkle minigame to work. Must be 6d6+0",
+        "sides": 6,
+        "count": 6,
+        "modifier": 0
     }
 }

@@ -9,23 +9,36 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
+#include "dice.hpp"
 
 namespace dice{
     inline int validateSides(int x) {
+
+    try {
     if(x <=0) {
-        std::cerr<<"Error: Sides must be >= 1\n";;
-        return 1;
+        throw x;
     }
+    
+    }
+    catch(int x) {
+        std::cerr<<"Error: Sides must be >= 1\nSides are: \n" <<x;
+    return 1;
+}
 
     return x;
 }
 
 inline int validateCount(int x) {
+    try {
 if(x <=0) {
         std::cerr<<"Error: Count must be >= 1\n";;
-        return 1;
+        throw x;
     }
-
+}
+catch (int x) {
+    std::cerr<<"Error: Count must be >= 1\nCount is: \n" <<x;
+    return 1;
+}
     return x;
 }
 
@@ -70,6 +83,7 @@ class DiceSet {
     int getCount()const;
 
     void setDie(Die);
+    Die getDie() const;
 
     void setSum(const int);
     
@@ -94,6 +108,7 @@ class DiceSet {
     std::string toBaseString() const;
 
 
+    std::vector<int> getDiceSet() const;
 
     private:
     std::vector<int> diceSet;
@@ -149,6 +164,12 @@ inline DiceSet::DiceSet(Die dice, int count, int modifier) : count(validateCount
     rollAll();
 }
 
+
+std::vector<int> DiceSet::getDiceSet() const {
+    return diceSet;
+}
+
+
 inline DiceSet::DiceSet() : count(1), modifier(0), sum(0), dice(Die(6)){}
 
 inline void DiceSet::setModifier(const int x) {modifier = x;}
@@ -156,6 +177,10 @@ inline void DiceSet::setSum(const int x) {sum = x;}
 
 inline int DiceSet::getSum() const{
     return sum;
+}
+
+inline Die DiceSet::getDie() const{
+    return dice;
 }
 
 

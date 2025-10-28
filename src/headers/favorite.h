@@ -27,6 +27,7 @@ class Favorite {
 
     std::string toString(const std::string& id);
 
+
     private:
         std::string id, name;
         DiceSet dice;

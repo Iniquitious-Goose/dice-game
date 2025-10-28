@@ -5,8 +5,8 @@
 
 #include "headers/menu.h"
 #include "headers/favorite.h"
+#include "headers/utilities.h"
 
-bool running = true;
 
 void showMenu(const std::string& fileName) {
     std::ifstream menuFile(fileName);
@@ -38,7 +38,7 @@ void handleMainMenu(gameContext& ctx) {
 
     try {
 
-        userChoice = std::stoi(getInput());
+        userChoice = std::stoi(ctx.program.getInput());
 
 
         menuOption option = static_cast<menuOption>(userChoice);
@@ -52,20 +52,25 @@ void handleMainMenu(gameContext& ctx) {
             case menuOption::rollFav:
                 favList.showFavorites();
                 std::cout<< "\n\nEnter favorite ID: ";
-                id = getInput();
+                id = ctx.program.getInput();
                 favList.rollFavorite(id);
                 
 
                 break;
+
+            case menuOption::games:
+                handleGameMenu(ctx);
+                break;
+
                 
 
 
          case menuOption::exit:
-            setRunning(false);
+            ctx.program.setRunning(false);
         
         }
 
-            waitForEnter();
+            ctx.program.waitForEnter();
 
 
     }
@@ -83,7 +88,7 @@ void handleMainMenu(gameContext& ctx) {
 
     catch (...) {
         std::cerr << "An unknown error occured. Exiting...\n";
-        setRunning(false);
+        ctx.program.setRunning(false);
     }
 
 
@@ -93,21 +98,8 @@ void handleMainMenu(gameContext& ctx) {
 
 }
 
-void setRunning(bool run) {
-
-    running = run;
-}
-
-bool isRunning() {
-    return running;
-}
 
 
-
-void waitForEnter() {
-    std::cout<< "\nPress Enter to return to main menu.\n";
-    std::cin.get();
-}
 
 void handleRollMenu(gameContext& ctx) {
 
@@ -128,7 +120,7 @@ void handleRollMenu(gameContext& ctx) {
 
     try {
 
-        userChoice = std::stoi(getInput());
+        userChoice = std::stoi(ctx.program.getInput());
 
 
         rollOption option = static_cast<rollOption>(userChoice);
@@ -144,7 +136,7 @@ void handleRollMenu(gameContext& ctx) {
             case rollOption::setSide:
 
 
-                userChoice = std::stoi(getInput());
+                userChoice = std::stoi(ctx.program.getInput());
 
                 ctx.set.setDie(Die(userChoice));
                 
@@ -152,7 +144,7 @@ void handleRollMenu(gameContext& ctx) {
                 break;
 
                 case rollOption::setCount:
-                userChoice = std::stoi(getInput());
+                userChoice = std::stoi(ctx.program.getInput());
 
                 ctx.set.setCount(userChoice);
                 break;
@@ -160,7 +152,7 @@ void handleRollMenu(gameContext& ctx) {
                 
                 case rollOption::setMod:
                 
-                userChoice = std::stoi(getInput());
+                userChoice = std::stoi(ctx.program.getInput());
                 ctx.set.setModifier(userChoice);
 
                 break;
@@ -191,7 +183,7 @@ void handleRollMenu(gameContext& ctx) {
 
     catch (...) {
         std::cerr << "An unknown error occured. Exiting...\n";
-        setRunning(false);
+        ctx.program.setRunning(false);
     }
 
 
@@ -203,10 +195,65 @@ void handleRollMenu(gameContext& ctx) {
 
 }
 
-std::string getInput() {
-    std::string input;
-    std::cout << "\n> ";
-    std::getline(std::cin, input);
-    return input;
+
+void handleGameMenu(gameContext& ctx) {
+
+    bool rolled = false;
+    while(!rolled) {
+    showMenu("data/game-menu.txt");
+
+
+    int userChoice;
+
+    try {
+
+        userChoice = std::stoi(ctx.program.getInput());
+
+
+        gameOption option = static_cast<gameOption>(userChoice);
+
+        switch (option) {
+
+            case gameOption::farkle:
+            
+                break;
+
+            case gameOption::knucklebones:
+            
+                break;
+        
+             case gameOption::highLow:
+            
+                break;
+
+            case gameOption::exit:
+            
+                return;
+        }
+
+    }
+    catch (const std::invalid_argument& e) {
+        std::cerr<< "Invalid input: not a number. Returning to main menu...\n";
+
+        return;
+
+    }
+    catch (const std::out_of_range& e) {
+        std::cerr << "Invalid input: out of range. Returning to main menu...\n";
+        
+        return;
+    }
+
+    catch (...) {
+        std::cerr << "An unknown error occured. Exiting...\n";
+        ctx.program.setRunning(false);
+    }
+
+
+
+    }
+
+
+
 
 }

@@ -97,6 +97,7 @@ void FavoriteList::rollFavorite(std::string& id) {
     }
 }
 
+
 std::string Favorite::toString() const{
     
     std::ostringstream output;
@@ -109,8 +110,9 @@ std::string Favorite::toString() const{
 
     output << dice.getModifier();
 
-    return output.str();
+    output << "\nName: " << id << "\n" <<dice.toBaseString();
 
+    return output.str();
 
 
     
@@ -132,7 +134,6 @@ void Favorite::roll() {
 Favorite::Favorite(const std::string& id, const DiceSet dice) :  id(id), dice(dice){
 
 }
-
 
   //gameContext(int userSide) : d20(20), d12(12), d10(10), d8(8), d6(6), d4(4), dArbitrary(userSide), set() {}
 
