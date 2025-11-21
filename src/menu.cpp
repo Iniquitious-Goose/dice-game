@@ -200,8 +200,8 @@ void handleRollMenu(gameContext& ctx) {
 
 void handleGameMenu(gameContext& ctx) {
 
-    bool rolled = false;
-    while(!rolled) {
+    bool runningGameMenu = true;
+    while(runningGameMenu) {
     showMenu("data/game-menu.txt");
     
     Farkle farkle;
@@ -232,8 +232,7 @@ void handleGameMenu(gameContext& ctx) {
                 break;
 
             case gameOption::exit:
-            
-                return;
+                runningGameMenu = false; break;
         }
 
     }

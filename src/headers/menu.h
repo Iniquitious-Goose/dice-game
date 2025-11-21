@@ -30,7 +30,6 @@ enum class gameOption {
     farkle =1,
     knucklebones,
     highLow,
-    cups,
     exit
 };
 
