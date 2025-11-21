@@ -6,6 +6,8 @@
 #include "headers/menu.h"
 #include "headers/favorite.h"
 #include "headers/utilities.h"
+#include "headers/games.h"
+
 
 
 void showMenu(const std::string& fileName) {
@@ -201,6 +203,8 @@ void handleGameMenu(gameContext& ctx) {
     bool rolled = false;
     while(!rolled) {
     showMenu("data/game-menu.txt");
+    
+    Farkle farkle;
 
 
     int userChoice;
@@ -215,6 +219,7 @@ void handleGameMenu(gameContext& ctx) {
         switch (option) {
 
             case gameOption::farkle:
+                farkle.play();
             
                 break;
 

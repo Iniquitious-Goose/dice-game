@@ -2,26 +2,27 @@
 #include <string>
 #include <array>
 #include "headers/games.h"
+#include "headers/menu.h"
 #include <algorithm>
 #include <sstream>
-
+#include <vector>
 
 //Farkle
-void farkleHand::updateScore() {totalScore+= roundScore; roundScore = 0;}
-void farkleHand::updateRoundScore(int r) {roundScore += r;}
+void FarkleHand::updateScore() {totalScore+= roundScore; roundScore = 0;}
+void FarkleHand::updateRoundScore(int r) {roundScore += r;}
 
     
-void farkleHand::bust() {roundScore = 0; endTurn();}
-void farkleHand::endTurn() {return;}
+void FarkleHand::bust() {roundScore = 0; endTurn();}
+void FarkleHand::endTurn() {return;}
 
-int farkleHand::getTotalScore() const {return totalScore;}
-int farkleHand::getRoundScore() const {return roundScore;}
+int FarkleHand::getTotalScore() const {return totalScore;}
+int FarkleHand::getRoundScore() const {return roundScore;}
 
-void farkleHand::setScoredDie(int s) {scoringDie = s;}
-int farkleHand::getScoringDie() const {return scoringDie;}
+void FarkleHand::setScoredDie(int s) {scoringDie = s;}
+int FarkleHand::getScoringDie() const {return scoringDie;}
 
 
-void farkleHand::applyScoredDie() {
+void FarkleHand::applyScoredDie() {
     if (getScoringDie() == 0) {
         setCount(6);
     }
@@ -30,7 +31,26 @@ void farkleHand::applyScoredDie() {
         setCount(getCount() - getScoringDie());
 }
 
-std::string farkleHand::toString() const{
+std::string FarkleHand::scoredString() const{
+
+    std::ostringstream output;
+
+    const auto& dice = scoring;
+
+
+    for(size_t i =0; i < dice.size(); i++) {
+        output << "#" << i+1 << ": " << dice.at(i).toString() << "\n";
+    }
+
+    output << dice.size() + 1 << ": " << "End turn." << "\n";
+    return output.str();
+
+
+}
+
+
+
+std::string FarkleHand::toString() const{
     std::ostringstream output;
 
     const auto& dice = getDiceSet();
@@ -54,7 +74,7 @@ Straight = 1500pts
 Two triples = 2500pts
  */
 
-void farkleHand::findScore() {
+void FarkleHand::findScore() {
 
 
     for (const auto& die : getDiceSet()) {
@@ -64,14 +84,12 @@ void farkleHand::findScore() {
 
     //straight
     if (std::all_of(counts.begin(), counts.end(), [](int c) {return c ==1; } )) {
-        updateRoundScore(1500);
-        setScoredDie(6);
+        scoring.push_back(ScoringDice(true, false));
         return;
     }
     //three pairs
     if (std::count(counts.begin(), counts.end(), 2) ==3 ) {
-        updateRoundScore(1500);
-        setScoredDie(6);
+        scoring.push_back(ScoringDice(false, true));
         return;
     }
     int score =0, scored =0, setScore =0;
@@ -86,19 +104,37 @@ void farkleHand::findScore() {
             if (tempCounts[i] > 3) {
                 int difference = tempCounts[i] - 3;
                 setScore *= 1 <<difference;
-                
             }
         score +=setScore;
             scored = tempCounts[i];
 
             tempCounts[i] = 0;
+            scoring.push_back(ScoringDice(setScore, scored));
+
         }
+       // scoring.push_back(ScoringDice(setScore, scored));
     }
 
-    score += tempCounts[0] * 100;
-    score += tempCounts[4] * 50;
+    setScore = 0; 
 
-    scored += tempCounts[0] + tempCounts[4];
+    for (int i=0; i < tempCounts[0]; i++) {
+        scoring.push_back(ScoringDice(100,1));
+    }
+ 
+ //   setScore += tempCounts[0] * 100;
+   // scoring.push_back(ScoringDice(setScore, tempCounts[0]));
+
+    setScore =0;
+
+    for (int i =0; i < tempCounts[4]; i++) {
+        scoring.push_back(ScoringDice(50,1));
+    }
+    
+    //setScore += tempCounts[4] * 50;
+    //scoring.push_back(ScoringDice(setScore, tempCounts[4]));
+
+
+    //scored += tempCounts[0] + tempCounts[4];
 
 
     if (scored ==0) {
@@ -106,10 +142,96 @@ void farkleHand::findScore() {
         return;
     }
 
-    setScoredDie(scored);
-    updateRoundScore(score);
-
     //getDiceSet;
 
 }
    
+
+std::vector <ScoringDice> FarkleHand::getScoring() const {
+    return scoring;
+}
+
+
+std::string ScoringDice::toString() const{
+    std::ostringstream output;
+
+    if (straight) {
+        output << "Straight: ";
+    }
+
+    else if (triplePair) {
+        output << "Triple pair: ";
+    }
+
+    else if (count >= 3) {
+        output << count << " of a kind: ";
+    }
+
+    else {
+        output << "Single: ";
+    }
+
+    output << score;
+    return output.str();
+}
+
+int ScoringDice::getScore() const {
+    return score;
+}
+void FarkleHand::select() {
+    return;
+}
+
+
+FarkleHand::FarkleHand() {
+    setDie(Die(6));
+    setCount(6);
+    setModifier(0);
+}
+
+
+Farkle::Farkle() {
+    playerHand1;
+    playerHand2;
+}
+
+void Farkle::play() {
+
+    FarkleHand* currentPlayer = &playerHand1;
+
+
+    for(int turn =0; turn <2;turn++) {
+        if(turn%2==0) {
+            currentPlayer = &playerHand1;
+        }
+        else {currentPlayer = &playerHand2;} 
+
+
+         currentPlayer->rollAll();
+        currentPlayer->findScore();
+        std::cout << currentPlayer->toString();
+
+        for (int i =0; i< currentPlayer->getScoring().size(); i++) {
+            if (currentPlayer->getScoring()[i].getScore() !=0) {
+            std::cout<<currentPlayer->getScoring()[i].toString() << "\n";
+            }
+        }        
+
+    }
+
+
+
+   /* while(!win) {
+        playerHand1.rollAll();
+        playerHand1.findScore();
+        std::cout << playerHand1.toString();
+
+        for (int i =0; i< playerHand1.getScoring().size(); i++) {
+            if (playerHand1.getScoring()[i].getScore() !=0) {
+            std::cout<<playerHand1.getScoring()[i].toString() << "\n";
+            }
+        }        
+
+        win = true;
+    }*/
+}

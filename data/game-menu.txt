@@ -2,9 +2,6 @@
         ROLL DICE
 =================================
 
-Enter how many dice you want to roll
-and select the die type.
-
  [1] Farkle
  [2] Knucklebones
  [3] High Low

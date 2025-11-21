@@ -165,7 +165,7 @@ inline DiceSet::DiceSet(Die dice, int count, int modifier) : count(validateCount
 }
 
 
-std::vector<int> DiceSet::getDiceSet() const {
+inline std::vector<int> DiceSet::getDiceSet() const {
     return diceSet;
 }
 
